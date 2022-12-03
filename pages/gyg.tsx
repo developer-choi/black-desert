@@ -3,9 +3,8 @@ import styled from 'styled-components';
 import {
   BLACK_STONE_ARMOR_BY_1HOUR,
   DROUGHTY_REVENUE_TABLES,
-  GOYUGYEOL_COUNT_BY_1HOUR,
-  goyugyeolRevenue
-} from '@util/extend/goyugyeol';
+  GYG_COUNT_BY_1HOUR, gygRevenue,
+} from '@util/extend/gyg';
 import {LocalStorageObjectManager} from '@util/extend/local-stroage';
 import {numberWithComma} from '@util/extend/core';
 import keepRestPrevState from '@util/extend/state';
@@ -15,15 +14,15 @@ import Form from '@component/atoms/Form';
 import InputComputableNumber from '@component/atoms/InputComputableNumber';
 import RadioLabel from '@component/atoms/RadioLabel';
 
-export default function GoyugyeolcalcPage() {
-  const [state, setState] = useGoYuGyeolManager();
+export default function GygPage() {
+  const [state, setState] = useGygManager();
 
   const onChangeGipaPrice = useCallback((value: string) => {
     setState(prevState => keepRestPrevState(prevState, ['gipaPrice'], {gipaPrice: Number(value)}));
   }, [setState]);
 
-  const setGoyugyeolPrice = useCallback((value: string) => {
-    setState(prevState => keepRestPrevState(prevState, ['goyugyeolPrice'], {goyugyeolPrice: Number(value)}));
+  const setGygPrice = useCallback((value: string) => {
+    setState(prevState => keepRestPrevState(prevState, ['gygPrice'], {gygPrice: Number(value)}));
   }, [setState]);
 
   const setBlackStoneArmorPrice = useCallback((value: string) => {
@@ -38,10 +37,10 @@ export default function GoyugyeolcalcPage() {
     return null;
   }
 
-  const {goyugyeolPrice, gipaPrice, blackStoneArmorPrice, droughty} = state;
+  const {gygPrice, gipaPrice, blackStoneArmorPrice, droughty} = state;
 
-  const {gipaRevenue, blackStoneArmorRevenue, totalRevenue} = goyugyeolRevenue({
-    goyugyeolPrice: Number(goyugyeolPrice),
+  const {gipaRevenue, blackStoneArmorRevenue, totalRevenue} = gygRevenue({
+    gygPrice: Number(gygPrice),
     gipaPrice: Number(gipaPrice),
     droughty,
     blackStoneArmorPrice: Number(blackStoneArmorPrice)
@@ -56,7 +55,7 @@ export default function GoyugyeolcalcPage() {
       
       <StyledFieldSet>
         <StyledLabel>고유결 가격</StyledLabel>
-        <StyledInput value={String(goyugyeolPrice)} onChangeText={setGoyugyeolPrice} enableComma enableDecimal={false}/>
+        <StyledInput value={String(gygPrice)} onChangeText={setGygPrice} enableComma enableDecimal={false}/>
       </StyledFieldSet>
       
       <StyledFieldSet>
@@ -79,30 +78,30 @@ export default function GoyugyeolcalcPage() {
       
       <Info># 밸류패키지 포함 가격입니다.</Info>
       <Info># 기파, 블랙스톤 방어구를 모두 팔았을 때 거래소 수수료 뗀 수익입니다.</Info>
-      <Info># 고유결을 1시간동안 {GOYUGYEOL_COUNT_BY_1HOUR}개 깐다고 가정합니다.</Info>
-      <Info># 고유결 {GOYUGYEOL_COUNT_BY_1HOUR}개 까서 기파가 {GOYUGYEOL_COUNT_BY_1HOUR}개 나왔다고 가정합니다.</Info>
+      <Info># 고유결을 1시간동안 {GYG_COUNT_BY_1HOUR}개 깐다고 가정합니다.</Info>
+      <Info># 고유결 {GYG_COUNT_BY_1HOUR}개 까서 기파가 {GYG_COUNT_BY_1HOUR}개 나왔다고 가정합니다.</Info>
       <Info># 1시간동안 나온 사냥꾼의 인장이 약 {BLACK_STONE_ARMOR_BY_1HOUR * 2}개, 이를 블방으로 바꿨을 때 {BLACK_STONE_ARMOR_BY_1HOUR}개라고 가정합니다.</Info>
       <Info># 블랙스톤 방어구는 모두 팔았을 때를 기준으로 가정합니다.</Info>
     </StyledForm>
   );
 }
 
-interface GoYuGyeolManager {
-  goyugyeolPrice: number;
+interface GygManager {
+  gygPrice: number;
   droughty: number;
   gipaPrice: number;
   blackStoneArmorPrice: number;
 }
 
-const GOYUGYEOL_MANAGER = new LocalStorageObjectManager<GoYuGyeolManager>('goyugyeol', {
+const GYG_MANAGER = new LocalStorageObjectManager<GygManager>('gyg', {
   gipaPrice: 3000000,
-  goyugyeolPrice: 1600000,
+  gygPrice: 1600000,
   droughty: 999,
   blackStoneArmorPrice: 150000
 });
 
-function useGoYuGyeolManager() {
-  return useLocalStorageObjectManager(GOYUGYEOL_MANAGER);
+function useGygManager() {
+  return useLocalStorageObjectManager(GYG_MANAGER);
 }
 
 const StyledForm = styled(Form)`
