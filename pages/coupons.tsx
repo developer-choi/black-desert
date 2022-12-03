@@ -81,9 +81,6 @@ main();
 }
 
 const Wrap = styled.div`
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   

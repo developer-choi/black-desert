@@ -14,7 +14,7 @@ import Form from '@component/atoms/Form';
 import InputComputableNumber from '@component/atoms/InputComputableNumber';
 import RadioLabel from '@component/atoms/RadioLabel';
 
-export default function GygPage() {
+export default function Page() {
   const [state, setState] = useGygManager();
 
   const onChangeGipaPrice = useCallback((value: string) => {
@@ -107,7 +107,6 @@ function useGygManager() {
 const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
-  margin: 20px;
 `;
 
 const StyledLabel = styled.span`

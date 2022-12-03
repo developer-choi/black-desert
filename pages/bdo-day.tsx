@@ -5,7 +5,7 @@ import InputText from '@component/atoms/InputText';
 import TextArea from '@component/atoms/TextArea';
 import {removeDuplicatedItems} from '@util/extend/core';
 
-export default function CheckGiveawayPage() {
+export default function Page() {
 
   const [nickname, setNickname] = useState('');
   const [registeredNicknames, setRegisteredNicknames] = useState<string[]>([]);
@@ -73,9 +73,6 @@ export default function CheckGiveawayPage() {
 }
 
 const Wrap = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 15px;
 `;
 
 const inputStyles = css`
