@@ -9,6 +9,7 @@ import React, {
 } from 'react';
 import {toast} from 'react-toastify';
 import {preventDefault} from '@util/extend/event';
+import styled from 'styled-components';
 
 export interface InputTextProp extends ComponentPropsWithoutRef<'input'> {
   onEnter?: (event: KeyboardEvent<HTMLInputElement>) => void;
@@ -57,7 +58,7 @@ export default forwardRef(function InputText(props: InputTextProp, ref: Ref<HTML
   const customOnChange = useCustomOnChange({onChange, onChangeText, maxLength});
 
   return (
-    <input
+    <StyledInput
       ref={ref}
       type={type}
       onChange={customOnChange}
@@ -68,6 +69,12 @@ export default forwardRef(function InputText(props: InputTextProp, ref: Ref<HTML
     />
   );
 });
+
+const StyledInput = styled.input`
+  border: 2px solid ${props => props.theme.main};
+  border-radius: 10px;
+  padding: 8px;
+`;
 
 export interface CustomOnChangeParam<T extends HTMLInputElement | HTMLTextAreaElement> {
   maxLength: number;
