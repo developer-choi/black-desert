@@ -37,7 +37,7 @@ export default function Page() {
       `당첨된 사용자는 <em>${matchNicknames.join(', ')}</em> 입니다.`;
 
   return (
-    <Wrap>
+    <>
       <H1>검사데이 당첨확인</H1>
       <StyledForm onSubmit={addNickname}>
         <InputText value={nickname} onChangeText={setNickname} placeholder="가문명 추가"/>
@@ -52,7 +52,7 @@ export default function Page() {
       )}
       <TextArea autoFocus value={texts} onChangeText={setTexts} placeholder="경품 당첨자 페이지의 전체를 복사해서 붙여넣어주세요."/>
       {!message ? null : <ResultMessage dangerouslySetInnerHTML={{__html: message}}/>}
-    </Wrap>
+    </>
   );
 }
 
@@ -67,12 +67,6 @@ function useRegisteredNicknamesManager() {
     enableDuplicated: false
   });
 }
-
-const Wrap = styled.div`
-  > :not(h1) {
-    margin-bottom: 15px;
-  }
-`;
 
 const StyledForm = styled(Form)`
   display: flex;

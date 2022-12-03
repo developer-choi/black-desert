@@ -19,4 +19,8 @@ const Wrap = styled.div`
 const Main = styled.main`
   margin-left: ${ASIDE_WIDTH}px;
   padding: 20px;
+  
+  > :not(h1) {
+    margin-bottom: 15px;
+  }
 `;

@@ -8,6 +8,14 @@ const resetCss = css`
     background-color: transparent;
     border: none;
   }
+  
+  li {
+    list-style: none;
+  }
+  
+  button {
+    font-size: inherit;
+  }
 `;
 
 export const GlobalStyle = createGlobalStyle`

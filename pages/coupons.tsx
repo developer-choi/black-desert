@@ -1,23 +1,82 @@
-import React, {useCallback, useMemo, useState, ClipboardEvent} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 import styled from 'styled-components';
 import {toast} from 'react-toastify';
 import TextArea from '@component/atoms/TextArea';
 import {removeDuplicatedItems} from '@util/extend/core';
 import Button from '@component/atoms/Button';
+import {H1} from '@component/atoms/heading';
+import InputText from '@component/atoms/InputText';
+import Form from '@component/atoms/Form';
 
 export default function Page() {
-
   const [value, setValue] = useState('');
-  const coupons = useMemo(() => parser(value), [value]);
+  const [content, setContent] = useState('');
+  const coupons = useMemo(() => parser(content), [content]);
 
-  const onPaste = useCallback((event: ClipboardEvent<HTMLTextAreaElement>) => {
-    const data = event.clipboardData.getData('text');
-    setValue(data);
-  }, []);
+  const onClickCopyToCode = useCallback(() => {
+    navigator.clipboard.writeText(createCode(coupons));
+    toast.info('복사되었습니다.');
+  }, [coupons]);
 
-  const sendCoupon = useCallback(() => {
-    navigator.clipboard.writeText(`
-    
+  const onAddDirectly = useCallback(() => {
+    if (value.length !== 19) {
+      toast.error('쿠폰번호는 공백 또는 하이픈(-) 포함 19자리만 가능합니다.');
+      return;
+    }
+
+    setValue('');
+    setContent(prevState => `${value.replaceAll(' ', '-')}\n${prevState}`);
+  }, [value]);
+
+  return (
+    <>
+      <H1>쿠폰 일괄 전송</H1>
+      <DirectForm onSubmit={onAddDirectly}>
+        <InputText value={value} onChangeText={setValue} placeholder="AAAA AAAA AAAA AAAA" maxLength={19}/>
+        <Button type="submit">직접추가</Button>
+      </DirectForm>
+      <TextArea placeholder="검은사막 쿠폰번호가 포함된 웹페이지 전체를 복사붙여넣기 해주세요. AAAA-AAAA-AAAA-AAAA 형식만 가능하며, 공백구분은 위의 버튼으로 직접 추가하세요." value={content} onChangeText={setContent}/>
+      {coupons.length === 0 ?
+        content.length === 0 ? null : '파싱결과 쿠폰이 존재하지않습니다.'
+        :
+        <div>
+          <H2>쿠폰번호 ({coupons.length}개)</H2>
+          <ul>
+            {coupons.map(coupon => (
+              <li key={coupon}>{coupon}</li>
+            ))}
+          </ul>
+          <ButtonWrap>
+            <Button onClick={onClickCopyToCode}>쿠폰번호 전송코드 복사</Button>
+            <Button as="a" target="_blank" href="https://payment.kr.playblackdesert.com/Shop/Coupon">쿠폰번호 입력하러가기</Button>
+          </ButtonWrap>
+        </div>
+      }
+    </>
+  );
+}
+
+const DirectForm = styled(Form)`
+  display: flex;
+  
+  > button {
+    margin-left: 10px;
+  }
+`;
+
+const H2 = styled.h2`
+  font-size: 18px;
+  margin-bottom: 10px;
+`;
+
+const ButtonWrap = styled.div`
+  display: flex;
+  column-gap: 10px;
+  margin-top: 10px;
+`;
+
+function createCode(coupons: string[]) {
+  return `
 let couponLength = 0;
 let respondCount = 0;
 
@@ -54,59 +113,8 @@ function main() {
 }
 
 main();
-
-`);
-    toast.info('복사되었습니다.');
-  }, [coupons]);
-
-  return (
-    <Wrap>
-      <StyledTextArea placeholder="검은사막 쿠폰번호를 복사붙여넣기 해주세요." value={value} onPaste={onPaste}/>
-      {coupons.length > 0 &&
-      <div>
-        <H2>쿠폰번호 ({coupons.length}개)</H2>
-        <ul>
-          {coupons.map(coupon => (
-            <li key={coupon}>{coupon}</li>
-          ))}
-        </ul>
-        <ButtonWrap>
-          <Button onClick={sendCoupon}>쿠폰번호 전송코드 복사</Button>
-          <Button as="a" target="_blank" href="https://payment.kr.playblackdesert.com/Shop/Coupon">쿠폰번호 입력하러가기</Button>
-        </ButtonWrap>
-      </div>
-      }
-    </Wrap>
-  );
+`;
 }
-
-const Wrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  
-  li {
-    line-height: 1.2;
-  }
-`;
-
-const H2 = styled.h2`
-  font-size: 18px;
-  margin-bottom: 10px;
-`;
-
-const StyledTextArea = styled(TextArea)`
-  width: 100%;
-  height: 400px;
-  border: 1px solid ${props => props.theme.main};
-  padding: 10px;
-  margin-bottom: 20px;
-`;
-
-const ButtonWrap = styled.div`
-  display: flex;
-  column-gap: 10px;
-  margin-top: 10px;
-`;
 
 function cleanText(text: string) {
   return text.trim().replace(/(\r,\t)/g, '');
@@ -126,7 +134,7 @@ function parser(text: string) {
   });
 
   if (result.length === 0) {
-    alert('쿠폰번호 파싱결과 쿠폰이 존재하지않음.');
+    return [];
   }
 
   return removeDuplicatedItems(result);
