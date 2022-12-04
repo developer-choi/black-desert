@@ -53,7 +53,7 @@ export default function FeeInfoModal(props: FeeSettingModalProp) {
   const resultFee = getFee({eventFee, droughty, enableRing, enableValuePackage});
 
   return (
-    <Modal title="수수료 정보" {...props}>
+    <Modal easilyClose title="수수료 정보" {...props}>
       <Wrap>
         <ol>
           {labels.map(({percent, name}, index) => (
