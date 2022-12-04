@@ -7,6 +7,7 @@ import {H1} from '@component/atoms/heading';
 import Button from '@component/atoms/Button';
 import {useLocalStorageArrayManager} from '@util/hooks/local-storage';
 import Image from 'next/image';
+import Head from 'next/head';
 
 export default function Page() {
 
@@ -39,6 +40,9 @@ export default function Page() {
 
   return (
     <>
+      <Head>
+        <title>검사데이 당첨확인</title>
+      </Head>
       <H1>검사데이 당첨확인</H1>
       <StyledForm onSubmit={addNickname}>
         <InputText value={nickname} onChangeText={setNickname} placeholder="가문명 추가"/>

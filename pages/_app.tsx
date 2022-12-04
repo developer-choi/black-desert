@@ -10,6 +10,7 @@ import {useAppDispatch} from '@store/storeHooks';
 import {initializeFeeSetting} from '@store/feeSetting';
 import {Provider} from 'react-redux';
 import {store} from '@store/store';
+import Head from 'next/head';
 
 /**
  * https://github.com/vercel/next.js/blob/master/examples/with-styled-components/pages/_app.js
@@ -17,6 +18,9 @@ import {store} from '@store/store';
 export default function App(props: AppProps) {
   return (
     <>
+      <Head>
+        <title>검은사막 유틸</title>
+      </Head>
       <GlobalStyle/>
       <Provider store={store}>
         <InnerApp {...props}/>

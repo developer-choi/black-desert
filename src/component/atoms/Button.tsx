@@ -17,8 +17,8 @@ const buttonHoverEffect = css`
 `;
 
 const Button = styled.button`
-  padding: 10px 15px;
-  min-width: 90px;
+  padding: 10px 25px;
+  min-width: 80px;
   border-radius: 10px; //size에는 border-radius도 포함되고,
   flex-shrink: 0; //버튼들 중에는 길이가 줄어들면 안되는 경우도 있어서 여기에 선언한다.
   background-color: ${props => props.theme.main};

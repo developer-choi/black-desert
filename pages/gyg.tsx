@@ -10,7 +10,8 @@ import InputComputableNumber from '@component/atoms/InputComputableNumber';
 import {H1} from '@component/atoms/heading';
 import {useAppSelector} from '@store/storeHooks';
 import {shallowEqual} from 'react-redux';
-import {FeeFieldSet, StyledFieldSet, StyledLabel} from '@component/atoms/forms';
+import {FeeFieldSet, Info, StyledFieldSet, StyledLabel} from '@component/atoms/forms';
+import Head from 'next/head';
 
 export default function Page() {
   const [state, setState] = useGygManager();
@@ -43,6 +44,9 @@ export default function Page() {
 
   return (
     <>
+      <Head>
+        <title>고유결 계산기</title>
+      </Head>
       <H1>고유결 계산기</H1>
       <StyledForm>
         <StyledFieldSet>
@@ -61,16 +65,20 @@ export default function Page() {
         </StyledFieldSet>
 
         <FeeFieldSet/>
+      </StyledForm>
 
-        <Info>1시간 기파수익 : <b>{numberWithComma(gipaRevenue)}</b></Info>
-        <Info>1시간 블방수익 : <b>{numberWithComma(blackStoneArmorRevenue)}</b></Info>
-        <Info>1시간 총수익 : <b>{numberWithComma(totalRevenue)}</b></Info>
+      <div>
+        <Info>1시간 기파수익 : <em>{numberWithComma(gipaRevenue)}</em></Info>
+        <Info>1시간 블방수익 : <em>{numberWithComma(blackStoneArmorRevenue)}</em></Info>
+        <Info>1시간 총수익 : <em>{numberWithComma(totalRevenue)}</em></Info>
+      </div>
 
+      <div>
         <Info className="mt-10"># 모두 팔고 거래소 수수료 뗀 수익입니다.</Info>
         <Info># 고유결을 1시간동안 {GYG_COUNT_BY_1HOUR}개 깐다고 가정합니다. (조합시간 제외)</Info>
         <Info># 고유결 {GYG_COUNT_BY_1HOUR}개 까서 기파가 {GYG_COUNT_BY_1HOUR}개 나왔다고 가정합니다.</Info>
         <Info># 1시간동안 나온 사냥꾼의 인장이 약 {BLACK_STONE_ARMOR_BY_1HOUR * 2}개, 이를 블방으로 바꿨다고 가정합니다.</Info>
-      </StyledForm>
+      </div>
     </>
   );
 }
@@ -94,16 +102,4 @@ function useGygManager() {
 const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
-`;
-
-const Info = styled.span`
-  margin-bottom: 10px;
-  
-  > b {
-    color: ${props => props.theme.main};
-  }
-  
-  &.mt-10 {
-    margin-top: 10px;
-  }
 `;

@@ -16,14 +16,23 @@ export const StyledLabel = styled.span`
 export const StyledFieldSet = styled.fieldset`
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
   
-  :last-of-type {
-    margin-bottom: 20px;
+  &:not(:last-of-type) {
+    margin-bottom: 10px;
   }
   
   .small {
     margin-left: 5px;
+  }
+`;
+
+export const Info = styled.p`
+  &:not(:last-of-type) {
+    margin-bottom: 5px;
+  }
+  
+  &.mt-10 {
+    margin-top: 10px;
   }
   
   em {

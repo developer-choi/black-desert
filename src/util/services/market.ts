@@ -12,6 +12,11 @@ export function getBreakEven({buyPrice, feeSetting}: BreakEvenParam) {
   return new Decimal(buyPrice).div(fee).ceil().toNumber();
 }
 
+export function getExpectedRecivePrice(price: number, feeSetting: FeeSettingState) {
+  const fee = getFee(feeSetting);
+  return new Decimal(price).mul(fee).floor().toNumber();
+}
+
 export interface CapitalGainParam {
   buyPrice: number;
   sellPrice: number;

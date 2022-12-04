@@ -21,6 +21,6 @@ const Main = styled.main`
   padding: 20px;
   
   > :not(h1) {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
   }
 `;

@@ -45,7 +45,7 @@ export default function FeeSettingModal(props: FeeSettingModalProp) {
         </RadioWrap>
         <CheckBox onChangeChecked={setEnableRing} checked={enableRing} label="거상의 반지 or 그믐달 거래 우대권"/>
         <div>
-          <InputComputableNumber value={eventFee} onChangeText={setEventFee}/>%
+          <InputComputableNumber value={eventFee} onChangeText={setEventFee} placeholder="거래소 수수료 감면 이벤트"/>%
         </div>
         <Button type="submit" onClick={save} className="full">저장</Button>
       </Wrap>

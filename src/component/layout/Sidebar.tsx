@@ -39,7 +39,7 @@ const Aside = styled.aside`
   position: fixed;
   display: flex;
   flex-direction: column;
-  background-color: ${props => props.theme.main}20;
+  background-color: ${props => props.theme.veryLightMain};
 `;
 
 const Anchor = styled.a`

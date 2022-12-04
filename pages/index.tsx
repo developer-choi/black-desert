@@ -15,10 +15,10 @@ export default function Page() {
 }
 
 export const PAGE_LINKS: {name: string, href: string;}[] = [
-  {name: '거래소 사재기 계산기', href: '/market'},
-  {name: '쿠폰 일괄 전송', href: '/coupons'},
-  {name: '검사데이 당첨확인', href: '/bdo-day'},
+  {name: '거래소 계산기', href: '/market'},
   {name: '고유결 계산기', href: '/gyg'},
+  {name: '쿠폰 일괄 전송', href: '/coupons'},
+  {name: '검사데이 당첨확인', href: '/bdo-day'}
 ];
 
 const Wrap = styled.div`

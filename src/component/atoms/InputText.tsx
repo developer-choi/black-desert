@@ -71,7 +71,7 @@ export default forwardRef(function InputText(props: InputTextProp, ref: Ref<HTML
 });
 
 const StyledInput = styled.input`
-  border: 2px solid ${props => props.theme.main};
+  border: 2px solid ${props => props.theme.lightMain};
   border-radius: 10px;
   padding: 8px;
 `;

@@ -32,7 +32,7 @@ export default forwardRef(function TextArea(props: TextAreaProp, ref: Ref<HTMLTe
 });
 
 const StyledTextArea = styled.textarea`
-  border: 2px solid ${props => props.theme.main};
+  border: 2px solid ${props => props.theme.lightMain};
   border-radius: 10px;
   padding: 8px;
   width: 100%;
