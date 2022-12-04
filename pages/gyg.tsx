@@ -8,14 +8,9 @@ import {useLocalStorageObjectManager} from '@util/hooks/local-storage';
 import Form from '@component/atoms/Form';
 import InputComputableNumber from '@component/atoms/InputComputableNumber';
 import {H1} from '@component/atoms/heading';
-import FeeSettingModal from '@component/modals/FeeSettingModal';
-import useToggle from '@util/hooks/useToggle';
 import {useAppSelector} from '@store/storeHooks';
 import {shallowEqual} from 'react-redux';
-import {getFee} from '@util/services/fee';
-import Button from '@component/atoms/Button';
-import FeeInfoModal from '@component/modals/FeeInfoModal';
-import Image from 'next/image';
+import {FeeFieldSet, StyledFieldSet, StyledLabel} from '@component/atoms/forms';
 
 export default function Page() {
   const [state, setState] = useGygManager();
@@ -33,9 +28,6 @@ export default function Page() {
     setState(prevState => keepRestPrevState(prevState, ['blackStoneArmorPrice'], {blackStoneArmorPrice: Number(value)}));
   }, [setState]);
 
-  const {value: visibleFeeSetting, setFalse: closeFeeSetting, setTrue: openFeeSetting} = useToggle(false);
-  const {value: visibleFeeInfo, setFalse: closeFeeInfo, setTrue: openFeeInfo} = useToggle(false);
-
   if (!state) {
     return null;
   }
@@ -49,39 +41,26 @@ export default function Page() {
     feeSetting
   });
 
-  const fee = getFee(feeSetting);
-  
   return (
     <>
       <H1>고유결 계산기</H1>
       <StyledForm>
         <StyledFieldSet>
           <StyledLabel>기파 가격</StyledLabel>
-          <StyledInput value={String(gipaPrice)} onChangeText={onChangeGipaPrice} enableComma enableDecimal={false}/>
+          <InputComputableNumber value={String(gipaPrice)} onChangeText={onChangeGipaPrice} enableComma enableDecimal={false}/>
         </StyledFieldSet>
 
         <StyledFieldSet>
           <StyledLabel>고유결 가격</StyledLabel>
-          <StyledInput value={String(gygPrice)} onChangeText={setGygPrice} enableComma enableDecimal={false}/>
+          <InputComputableNumber value={String(gygPrice)} onChangeText={setGygPrice} enableComma enableDecimal={false}/>
         </StyledFieldSet>
 
         <StyledFieldSet>
           <StyledLabel>블방 가격</StyledLabel>
-          <StyledInput value={String(blackStoneArmorPrice)} onChangeText={setBlackStoneArmorPrice} enableComma enableDecimal={false}/>
+          <InputComputableNumber value={String(blackStoneArmorPrice)} onChangeText={setBlackStoneArmorPrice} enableComma enableDecimal={false}/>
         </StyledFieldSet>
 
-        <StyledFieldSet>
-          <StyledLabel>수수료</StyledLabel>
-          <span>{fee}</span>
-          <Button className="small orange" onClick={openFeeSetting}>
-            <Image src="/edit.png" alt="수정" width={16} height={16}/>
-            수정
-          </Button>
-          <Button className="small blue" onClick={openFeeInfo}>
-            <Image src="/info.png" alt="정보" width={16} height={16}/>
-            정보
-          </Button>
-        </StyledFieldSet>
+        <FeeFieldSet/>
 
         <Info>1시간 기파수익 : <b>{numberWithComma(gipaRevenue)}</b></Info>
         <Info>1시간 블방수익 : <b>{numberWithComma(blackStoneArmorRevenue)}</b></Info>
@@ -92,8 +71,6 @@ export default function Page() {
         <Info># 고유결 {GYG_COUNT_BY_1HOUR}개 까서 기파가 {GYG_COUNT_BY_1HOUR}개 나왔다고 가정합니다.</Info>
         <Info># 1시간동안 나온 사냥꾼의 인장이 약 {BLACK_STONE_ARMOR_BY_1HOUR * 2}개, 이를 블방으로 바꿨다고 가정합니다.</Info>
       </StyledForm>
-      <FeeSettingModal visible={visibleFeeSetting} close={closeFeeSetting}/>
-      <FeeInfoModal visible={visibleFeeInfo} close={closeFeeInfo}/>
     </>
   );
 }
@@ -117,29 +94,6 @@ function useGygManager() {
 const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
-`;
-
-const StyledLabel = styled.span`
-  width: 100px;
-`;
-
-const StyledFieldSet = styled.fieldset`
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  
-  :last-of-type {
-    margin-bottom: 20px;
-  }
-  
-  .small {
-    margin-left: 5px;
-  }
-`;
-
-const StyledInput = styled(InputComputableNumber)`
-  padding: 5px;
-  border: 2px solid ${props => props.theme.main};
 `;
 
 const Info = styled.span`

@@ -25,6 +25,7 @@ const Button = styled.button`
   color: white;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   
   //<SomeButton as='a'로 만들 때 필요한 css
   a& {

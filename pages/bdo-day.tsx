@@ -13,7 +13,7 @@ export default function Page() {
   const [nickname, setNickname] = useState('');
   const [texts, setTexts] = useState('');
   const {list: registeredNicknames, appendLast, removeByPk} = useRegisteredNicknamesManager();
-  
+
   const addNickname = useCallback(() => {
     appendLast({nickname});
     setNickname('');

@@ -2,7 +2,6 @@ import React, {useCallback, useState} from 'react';
 import styled from 'styled-components';
 import type {ModalProp} from '@component/modals/Modal';
 import Modal from '@component/modals/Modal';
-import Form from '@component/atoms/Form';
 import CheckBox from '@component/atoms/CheckBox';
 import RadioGroup from '@component/atoms/RadioGroup';
 import RadioLabel from '@component/atoms/RadioLabel';
@@ -54,7 +53,7 @@ export default function FeeSettingModal(props: FeeSettingModalProp) {
   );
 }
 
-const Wrap = styled(Form)`
+const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
