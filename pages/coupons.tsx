@@ -73,11 +73,11 @@ export default function Page() {
 }
 
 const guides: GuideProp[] = [
-  {title: '1. 웹페이지 전체 복사하기', description: '쿠폰번호가 있는 웹페이지에서 <em>Ctrl+A</em>로 웹페이지 텍스트 전체를 선택 후 <em>Ctrl+C</em>로 복사합니다.', img: '/coupon/guide1.png'},
-  {title: '2. 쿠폰 전송코드 얻기', description: '복사한 웹페이지 내용을 입력박스에 <em>Ctrl+V</em>로 붙여넣은 후, 하단의 <em>쿠폰번호 전송코드복사</em> 버튼을 클릭합니다.', img: '/coupon/guide2.png'},
-  {title: '3. 개발자 도구 열기', description: `검은사막 쿠폰번호 입력페이지로 이동하여 개발자도구(윈도우: <em>F12</em>)를 열고 <em>Console탭</em>을 선택하여 <em>Ctrl+V</em>를 통해 복사된 쿠폰번호 전송코드를 붙여넣습니다.`, img: '/coupon/guide3.png'},
-  {title: '4. 쿠폰 전송코드 실행하기', description: `<em>엔터</em>를 칠 경우, 코드가 실행되며, <em>코드 하단에 메시지</em>가 출력됩니다.`, img: '/coupon/guide4.png'},
-  {title: '5. 웹 창고로 아이템 이동하기', description: `모든 쿠폰번호가 전송될 경우, <em>자동으로 웹창고 페이지로 이동</em>됩니다.`, img: '/coupon/guide5.png'},
+  {title: '1. 웹페이지 전체 복사하기', description: '쿠폰번호가 있는 웹페이지에서 <em>Ctrl+A</em>로 웹페이지 텍스트 전체를 선택 후 <em>Ctrl+C</em>로 복사합니다.', img: '/coupon-guide1.png'},
+  {title: '2. 쿠폰 전송코드 얻기', description: '복사한 웹페이지 내용을 입력박스에 <em>Ctrl+V</em>로 붙여넣은 후, 하단의 <em>쿠폰번호 전송코드복사</em> 버튼을 클릭합니다.', img: '/coupon-guide2.png'},
+  {title: '3. 개발자 도구 열기', description: `검은사막 쿠폰번호 입력페이지로 이동하여 개발자도구(윈도우: <em>F12</em>)를 열고 <em>Console탭</em>을 선택하여 <em>Ctrl+V</em>를 통해 복사된 쿠폰번호 전송코드를 붙여넣습니다.`, img: '/coupon-guide3.png'},
+  {title: '4. 쿠폰 전송코드 실행하기', description: `<em>엔터</em>를 칠 경우, 코드가 실행되며, <em>코드 하단에 메시지</em>가 출력됩니다.`, img: '/coupon-guide4.png'},
+  {title: '5. 웹 창고로 아이템 이동하기', description: `모든 쿠폰번호가 전송될 경우, <em>자동으로 웹창고 페이지로 이동</em>됩니다.`, img: '/coupon-guide5.png'},
 ];
 
 const warnings: string[] = [
