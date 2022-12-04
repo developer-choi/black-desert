@@ -17,12 +17,14 @@ const buttonHoverEffect = css`
 `;
 
 const Button = styled.button`
-  padding: 8px 15px;
+  padding: 10px 15px;
   min-width: 90px;
   border-radius: 10px; //size에는 border-radius도 포함되고,
   flex-shrink: 0; //버튼들 중에는 길이가 줄어들면 안되는 경우도 있어서 여기에 선언한다.
   background-color: ${props => props.theme.main};
   color: white;
+  display: inline-flex;
+  align-items: center;
   
   //<SomeButton as='a'로 만들 때 필요한 css
   a& {
@@ -44,6 +46,25 @@ const Button = styled.button`
     display: inline-flex;
     justify-content: center;
     align-items: center;
+  }
+  
+  &.small {
+    padding: 4px 8px;
+    min-width: 50px;
+    font-size: 12px;
+    border-radius: 5px;
+  }
+  
+  &.full {
+    width: 100%;
+  }
+    
+  &.orange {
+    background-color: #ff9800;
+  }
+  
+  &.blue {
+    background-color: #209cff;
   }
 `;
 

@@ -16,6 +16,22 @@ const resetCss = css`
   button {
     font-size: inherit;
   }
+  
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+  
+  em {
+    font-style: initial;
+  }
 `;
 
 export const GlobalStyle = createGlobalStyle`
@@ -26,6 +42,10 @@ export const GlobalStyle = createGlobalStyle`
   
   html, body, #__next {
     height: 100%;
+  }
+  
+  body {
+    font-size: 14px;
   }
   
   ${resetCss};

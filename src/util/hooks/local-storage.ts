@@ -63,7 +63,7 @@ export function useLocalStorageArrayManager<I extends Object, P extends PkType>(
   }, [manager, setState]);
 
   return {
-    list: state ?? [],
+    list: state,
     appendFirst,
     appendLast,
     removeByPk

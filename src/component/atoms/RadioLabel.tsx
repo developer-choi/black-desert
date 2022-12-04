@@ -31,6 +31,10 @@ const Label = styled.label`
   align-items: center;
   cursor: pointer;
   
+  input {
+    margin-right: 3px;
+  }
+  
   &.disabled {
     /**
      * 이 스타일을 적용한 근거 : https://developer.mozilla.org/ko/docs/Web/CSS/:disabled

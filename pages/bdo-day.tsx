@@ -6,6 +6,7 @@ import TextArea from '@component/atoms/TextArea';
 import {H1} from '@component/atoms/heading';
 import Button from '@component/atoms/Button';
 import {useLocalStorageArrayManager} from '@util/hooks/local-storage';
+import Image from 'next/image';
 
 export default function Page() {
 
@@ -102,7 +103,9 @@ function Nickname({nickname, onDelete}: NicknameProp) {
   return (
     <NicknameWrap>
       <NicknameText>{nickname}</NicknameText>
-      <DeleteButton onClick={_onDelete}>X</DeleteButton>
+      <DeleteButton onClick={_onDelete}>
+        <Image src="/close.png" alt="close" width={20} height={20}/>
+      </DeleteButton>
     </NicknameWrap>
   );
 }
@@ -125,8 +128,6 @@ const NicknameText = styled.span`
 
 const DeleteButton = styled.button`
   position: absolute;
-  top: 2px;
-  right: 5px;
-  font-size: 12px;
-  font-weight: bold;
+  top: 0;
+  right: 0;
 `;
