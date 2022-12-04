@@ -29,6 +29,10 @@ const resetCss = css`
     -moz-appearance: textfield;
   }
   
+  ::placeholder {
+    color: #bbb;
+  }
+  
   em {
     font-style: initial;
   }

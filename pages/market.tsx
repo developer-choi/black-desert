@@ -25,12 +25,12 @@ export default function Page() {
       <H1>거래소 계산기</H1>
       <StyledFieldSet>
         <StyledLabel>구매 가격</StyledLabel>
-        <InputComputableNumber value={buyPrice} onChangeText={setBuyPrice} enableComma enableDecimal={false}/>
+        <InputComputableNumber placeholder="100,000,000" value={buyPrice} onChangeText={setBuyPrice} enableComma enableDecimal={false}/>
       </StyledFieldSet>
 
       <StyledFieldSet>
         <StyledLabel>판매 가격</StyledLabel>
-        <InputComputableNumber value={sellPrice} onChangeText={setSellPrice} enableComma enableDecimal={false}/>
+        <InputComputableNumber placeholder="100,000,000" value={sellPrice} onChangeText={setSellPrice} enableComma enableDecimal={false}/>
       </StyledFieldSet>
 
       <FeeFieldSet/>
