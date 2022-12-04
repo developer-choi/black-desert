@@ -4,10 +4,12 @@ import {toast} from 'react-toastify';
 import TextArea from '@component/atoms/TextArea';
 import {removeDuplicatedItems} from '@util/extend/core';
 import Button from '@component/atoms/Button';
-import {H1} from '@component/atoms/heading';
+import {H1, H2} from '@component/atoms/heading';
 import InputText from '@component/atoms/InputText';
 import Form from '@component/atoms/Form';
 import Head from 'next/head';
+import type {GuideProp} from '@component/molecules/Guide';
+import Guide from '@component/molecules/Guide';
 
 export default function Page() {
   const [value, setValue] = useState('');
@@ -56,30 +58,13 @@ export default function Page() {
           </ButtonWrap>
         </div>
       }
-      <CouponGuide/>
-    </>
-  );
-}
 
-function CouponGuide() {
-  const clickToNewTab = useCallback((src: string) => {
-    window.open(src);
-  }, []);
-
-  return (
-    <>
       <H2 className="mt-50">가이드</H2>
-      <div>
-        {guides.map(({img, description, title}) => (
-          <Guide key={title}>
-            <Title>{title}</Title>
-            <img src={img} alt="가이드" width="1200" onClick={() => clickToNewTab(img)}/>
-            <Description dangerouslySetInnerHTML={{__html: description}}/>
-          </Guide>
-        ))}
-      </div>
+      {guides.map(({img, description, title}) => (
+        <Guide key={title} title={title} description={description} img={img}/>
+      ))}
 
-      <H2>주의사항</H2>
+      <H2 className="mt-50">주의사항</H2>
       {warnings.map(warning => (
         <Warning key={warning} dangerouslySetInnerHTML={{__html: warning}}/>
       ))}
@@ -87,27 +72,20 @@ function CouponGuide() {
   );
 }
 
-const Guide = styled.div`
-  img {
-    cursor: pointer;
-  }
-  
-  margin-bottom: 34px;
-`;
+const guides: GuideProp[] = [
+  {title: '1. 웹페이지 전체 복사하기', description: '쿠폰번호가 있는 웹페이지에서 <em>Ctrl+A</em>로 웹페이지 텍스트 전체를 선택 후 <em>Ctrl+C</em>로 복사합니다.', img: '/coupon/guide1.png'},
+  {title: '2. 쿠폰 전송코드 얻기', description: '복사한 웹페이지 내용을 입력박스에 <em>Ctrl+V</em>로 붙여넣은 후, 하단의 <em>쿠폰번호 전송코드복사</em> 버튼을 클릭합니다.', img: '/coupon/guide2.png'},
+  {title: '3. 개발자 도구 열기', description: `검은사막 쿠폰번호 입력페이지로 이동하여 개발자도구(윈도우: <em>F12</em>)를 열고 <em>Console탭</em>을 선택하여 <em>Ctrl+V</em>를 통해 복사된 쿠폰번호 전송코드를 붙여넣습니다.`, img: '/coupon/guide3.png'},
+  {title: '4. 쿠폰 전송코드 실행하기', description: `<em>엔터</em>를 칠 경우, 코드가 실행되며, <em>코드 하단에 메시지</em>가 출력됩니다.`, img: '/coupon/guide4.png'},
+  {title: '5. 웹 창고로 아이템 이동하기', description: `모든 쿠폰번호가 전송될 경우, <em>자동으로 웹창고 페이지로 이동</em>됩니다.`, img: '/coupon/guide5.png'},
+];
 
-const Title = styled.h3`
-  font-size: 20px;
-  margin-bottom: 10px;
-`;
-
-const Description = styled.p`
-  font-size: 18px;
-  
-  em {
-    font-weight: bold;
-    color: black;
-  }
-`;
+const warnings: string[] = [
+  '개발자 도구 콘솔에서 <em>신뢰할 수 없는 코드</em>를 절대로 실행하지 마세요. <em>원래는 보안상 굉장히 위험한 행동</em>입니다.',
+  '<em>중복</em>된 쿠폰번호를 <em>10개</em>이상 전송을 시도할 경우, 펄어비스에서 <em>1시간</em>동안 쿠폰번호 입력을 <em>제한</em>하고 있습니다.',
+  '그러므로 한번에 10개이상의 쿠폰번호를 전송하는 경우, 제한을 당하지 않도록 신경써주시기 바랍니다.',
+  '해당 코드를 <em>악의적</em>으로 사용할 경우 문제가 생길 수 있습니다. (예시: 코드를 조작하여 <em>수십만개의</em> 쿠폰번호를 한번에 전송하려고 시도하는 경우)',
+];
 
 const Warning = styled.p`
   color: red;
@@ -120,35 +98,11 @@ const Warning = styled.p`
   }
 `;
 
-const guides: {title: string, description: string, img: string}[] = [
-  {title: '1. 웹페이지 전체 복사하기', description: '쿠폰번호가 있는 웹페이지에서 <em>Ctrl+A</em>로 웹페이지 텍스트 전체를 선택 후 <em>Ctrl+C</em>로 복사합니다.', img: '/coupon1.png'},
-  {title: '2. 쿠폰 전송코드 얻기', description: '복사한 웹페이지 내용을 입력박스에 <em>Ctrl+V</em>로 붙여넣은 후, 하단의 <em>쿠폰번호 전송코드복사</em> 버튼을 클릭합니다.', img: '/coupon2.png'},
-  {title: '3. 개발자 도구 열기', description: `검은사막 쿠폰번호 입력페이지로 이동하여 개발자도구(윈도우: <em>F12</em>)를 열고 <em>Console탭</em>을 선택하여 <em>Ctrl+V</em>를 통해 복사된 쿠폰번호 전송코드를 붙여넣습니다.`, img: '/coupon3.png'},
-  {title: '4. 쿠폰 전송코드 실행하기', description: `<em>엔터</em>를 칠 경우, 코드가 실행되며, <em>코드 하단에 메시지</em>가 출력됩니다.`, img: '/coupon4.png'},
-  {title: '5. 웹 창고로 아이템 이동하기', description: `모든 쿠폰번호가 전송될 경우, <em>자동으로 웹창고 페이지로 이동</em>됩니다.`, img: '/coupon5.png'},
-];
-
-const warnings: string[] = [
-  '개발자 도구 콘솔에서 <em>신뢰할 수 없는 코드</em>를 절대로 실행하지 마세요. <em>원래는 보안상 굉장히 위험한 행동</em>입니다.',
-  '<em>중복</em>된 쿠폰번호를 <em>10개</em>이상 전송을 시도할 경우, 펄어비스에서 <em>1시간</em>동안 쿠폰번호 입력을 <em>제한</em>하고 있습니다.',
-  '그러므로 한번에 10개이상의 쿠폰번호를 전송하는 경우, 제한을 당하지 않도록 신경써주시기 바랍니다.',
-  '해당 코드를 <em>악의적</em>으로 사용할 경우 문제가 생길 수 있습니다. (예시: 코드를 조작하여 <em>수십만개의</em> 쿠폰번호를 한번에 전송하려고 시도하는 경우)',
-];
-
 const DirectForm = styled(Form)`
   display: flex;
   
   > button {
     margin-left: 10px;
-  }
-`;
-
-const H2 = styled.h2`
-  font-size: 24px;
-  margin-bottom: 10px;
-  
-  &.mt-50 {
-    margin-top: 50px;
   }
 `;
 
