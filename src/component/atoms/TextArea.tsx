@@ -36,6 +36,7 @@ const StyledTextArea = styled.textarea`
   border-radius: 10px;
   padding: 8px;
   width: 100%;
+  max-width: 500px;
   min-height: 300px;
   resize: none;
 `;
