@@ -68,9 +68,9 @@ export default function Page() {
 }
 
 const guides: GuideProp[] = [
-  {title: '1. 가문명 추가하기', description: '당첨확인을 하고싶은 가문명을 입력하세요. (본인, 지인 등등) 입력된 값은 해당 컴퓨터의 브라우저에 저장됩니다.', img: '/bdo-day-guide1.png'},
-  {title: '2. 웹페이지 전체 복사하기', description: '당첨자가 있는 웹페이지에서 <em>Ctrl+A</em>로 웹페이지 텍스트 전체를 선택 후 <em>Ctrl+C</em>로 복사합니다.', img: '/bdo-day-guide2.png'},
-  {title: '3. 입력박스에 붙여넣기', description: '복사한 내용을 입력박스에 <em>Ctrl+V</em>로 붙여넣습니다.', img: '/bdo-day-guide3.png'},
+  {title: '1. 가문명 추가하기', description: '당첨확인을 하고싶은 가문명을 입력하세요. (본인, 지인 등등) 입력된 값은 해당 컴퓨터의 브라우저에 저장됩니다.', img: '/bdo-day/guide1.png'},
+  {title: '2. 웹페이지 전체 복사하기', description: '당첨자가 있는 웹페이지에서 <em>Ctrl+A</em>로 웹페이지 텍스트 전체를 선택 후 <em>Ctrl+C</em>로 복사합니다.', img: '/bdo-day/guide2.png'},
+  {title: '3. 입력박스에 붙여넣기', description: '복사한 내용을 입력박스에 <em>Ctrl+V</em>로 붙여넣습니다.', img: '/bdo-day/guide3.png'},
 ];
 
 interface User {
