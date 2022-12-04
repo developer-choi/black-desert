@@ -37,16 +37,16 @@ export default function Page() {
 
       <div>
         {buyPrice.length === 0 ? null : (
-          <Info># 손익 분기 <em>{numberWithComma(breakEven)}</em>은화 이상 팔아야 수익이 발생합니다.</Info>
+          <Info># 손익분기: <em>{numberWithComma(breakEven)}</em> 은화</Info>
         )}
 
         {sellPrice.length === 0 ? null : (
-          <Info># 판매 수령액 <span><em>{numberWithComma(sellResultPrice)}</em></span></Info>
+          <Info># 판매 수령액: <em>{numberWithComma(sellResultPrice)}</em> 은화</Info>
         )}
 
         {!(buyPrice.length > 0 && sellPrice.length > 0) ? null : (
           <Info>
-            # 차익 계산 <span className="distance">{numberWithComma(STANDARD_PRICE)}은화당</span>
+            # <span className="distance">{numberWithComma(STANDARD_PRICE)}은화당</span>
             <span className="distance"><em className={state}>{numberWithComma(capitalGain)}</em>은화의</span>
             <em className={state}>{stateText}</em> 발생합니다.
           </Info>
