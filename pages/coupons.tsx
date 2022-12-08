@@ -43,7 +43,14 @@ export default function Page() {
       </DirectForm>
       <TextArea placeholder="검은사막 쿠폰번호가 포함된 웹페이지 전체를 복사붙여넣기 해주세요. AAAA-AAAA-AAAA-AAAA 형식만 가능하며, 공백형식은 위에서 직접추가 해주세요." value={content} onChangeText={setContent}/>
       {coupons.length === 0 ?
-        content.length === 0 ? null : <p>파싱결과 쿠폰이 존재하지않습니다.</p>
+        content.length === 0 ?
+          null
+          :
+          <ErrorParagraph>
+            분석결과 쿠폰이 존재하지않습니다.<br/>
+            쿠폰번호는 하이픈(-)로 연결한 <em className="bg">AAAA-BBBB-CCCC-DDDD</em> 형식만 지원하며<br/>
+            공백으로 연결한 <em className="bg">AAAA BBBB CCCC DDDD</em>형식은 위의 <em className="fg">직접추가</em> 버튼으로 추가해주세요.
+          </ErrorParagraph>
         :
         <div>
           <H2>쿠폰번호 ({coupons.length}개)</H2>
@@ -86,6 +93,18 @@ const warnings: string[] = [
   '그러므로 한번에 10개이상의 쿠폰번호를 전송하는 경우, 제한을 당하지 않도록 신경써주시기 바랍니다.',
   '해당 코드를 <em>악의적</em>으로 사용할 경우 문제가 생길 수 있습니다. (예시: 코드를 조작하여 <em>수십만개의</em> 쿠폰번호를 한번에 전송하려고 시도하는 경우)',
 ];
+
+const ErrorParagraph = styled.p`
+  em.fg {
+    font-weight: bold;
+    background-color: ${props => props.theme.main};
+    color: white;
+  }
+  
+  em.bg {
+    background-color: yellow;
+  }
+`;
 
 const Warning = styled.p`
   color: red;
